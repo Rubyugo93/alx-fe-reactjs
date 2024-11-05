@@ -1,4 +1,3 @@
-// src/App.jsx
 import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
@@ -6,7 +5,7 @@ import './App.css';
 import Header from './components/Header'; // Import Header component
 import MainContent from './components/MainContent'; // Import MainContent component
 import Footer from './components/Footer'; // Import Footer component
-import Welcome from './components/Welcome'; // Import Welcome component
+import WelcomeMessage from './components/WelcomeMessage'; // Import WelcomeMessage component
 
 function App() {
   const [count, setCount] = useState(0);
@@ -22,7 +21,7 @@ function App() {
         </a>
       </div>
       <Header />  {/* Include Header component */}
-      <Welcome />  {/* Include Welcome component */}
+      <WelcomeMessage />  {/* Include WelcomeMessage component */}
       <MainContent />  {/* Include MainContent component */}
       <Footer />  {/* Include Footer component */}
 
