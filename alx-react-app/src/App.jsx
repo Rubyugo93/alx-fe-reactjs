@@ -1,8 +1,11 @@
+// App.jsx
 import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
-import WelcomeMessage from './WelcomeMessage'; // Import the WelcomeMessage component
+import Header from './Header';          // Import Header component
+import MainContent from './MainContent';// Import MainContent component
+import Footer from './Footer';          // Import Footer component
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,9 +21,11 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      
-      {/* Add the WelcomeMessage component here */}
-      <WelcomeMessage />
+
+      {/* Include the components here */}
+      <Header />
+      <MainContent />
+      <Footer />
 
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
