@@ -2,10 +2,11 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
-import Header from './components/Header'; // Import Header component
-import MainContent from './components/MainContent'; // Import MainContent component
-import Footer from './components/Footer'; // Import Footer component
-import WelcomeMessage from './components/WelcomeMessage'; // Import WelcomeMessage component
+import Header from './components/Header';
+import MainContent from './components/MainContent';
+import Footer from './components/Footer';
+import WelcomeMessage from './components/WelcomeMessage';
+import UserProfile from './components/UserProfile'; // Import UserProfile component
 
 function App() {
   const [count, setCount] = useState(0);
@@ -20,11 +21,15 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <Header />  {/* Include Header component */}
-      <WelcomeMessage />  {/* Include WelcomeMessage component */}
-      <MainContent />  {/* Include MainContent component */}
-      <Footer />  {/* Include Footer component */}
-
+      <Header />
+      <WelcomeMessage />
+      <MainContent />
+      <UserProfile 
+        name="Alice" 
+        age="25" 
+        bio="Loves hiking and photography" 
+      /> {/* Use UserProfile with props */}
+      <Footer />
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
