@@ -16,7 +16,7 @@ function App() {
       {/* Include Header component */}
       <Header />
 
-      {/* Include WelcomeMessage component */}
+      {/* Include WelcomeMessage component (render only once) */}
       <WelcomeMessage />
 
       {/* Include MainContent component */}
@@ -31,9 +31,6 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-
-      {/* Display the WelcomeMessage component */}
-      <WelcomeMessage />
 
       {/* Counter button */}
       <h1>Vite + React</h1>
