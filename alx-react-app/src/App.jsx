@@ -35,7 +35,7 @@ function App() {
       {/* UserProfile component with sample data */}
       <UserProfile 
         name="Alice" 
-        age="25" 
+        age={25}  {/* Pass a number for age */}
         bio="Loves hiking and photography" 
       />
 
