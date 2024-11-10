@@ -32,12 +32,8 @@ function App() {
         </a>
       </div>
 
-      {/* UserProfile component with sample data */}
-      <UserProfile 
-        name="Alice" 
-        age={25}  {/* Pass a number for age */}
-        bio="Loves hiking and photography" 
-      />
+      {/* Display the WelcomeMessage component */}
+      <WelcomeMessage />
 
       {/* Counter button */}
       <h1>Vite + React</h1>
