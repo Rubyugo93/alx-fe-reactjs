@@ -2,30 +2,30 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
-import WelcomeMessage from './components/WelcomeMessage';
-import Header from './components/Header';
-import MainContent from './components/MainContent';
-import Footer from './components/Footer';
-import UserProfile from './components/UserProfile';
+import WelcomeMessage from './components/WelcomeMessage'; // Import WelcomeMessage
+import Header from './components/Header'; // Import Header component
+import MainContent from './components/MainContent'; // Import MainContent component
+import Footer from './components/Footer'; // Import Footer component
+import UserProfile from './components/UserProfile'; // Import UserProfile component
+import Counter from './components/Counter'; // Import Counter component
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      {/* Header with inline CSS */}
-      <header style={{ backgroundColor: 'navy', color: 'white', textAlign: 'center', padding: '20px' }}>
-        <h1>My Favorite Cities</h1>
-      </header>
-
-      {/* WelcomeMessage component */}
+      {/* Include Header component */}
+      <Header />
+      
+      {/* Include WelcomeMessage component */}
       <WelcomeMessage />
-
-      {/* MainContent component */}
+      
+      {/* Include MainContent component */}
       <MainContent />
+      
+      {/* Include UserProfile component with example props */}
+      <UserProfile name="John Doe" age={30} bio="A traveler and photographer" />
 
       {/* Display Vite and React logos */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
+      <div>
         <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -34,32 +34,11 @@ function App() {
         </a>
       </div>
 
-      {/* UserProfile component with inline styling */}
-      <UserProfile 
-        name="Alice" 
-        age="25" 
-        bio="Loves hiking and photography"
-      />
+      {/* Include Counter component */}
+      <Counter />
 
-      {/* Counter section */}
-      <h1 style={{ textAlign: 'center' }}>Vite + React</h1>
-      <div className="card" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <button 
-          onClick={() => setCount((count) => count + 1)} 
-          style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}
-        >
-          count is {count}
-        </button>
-        <p style={{ marginTop: '10px', textAlign: 'center' }}>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs" style={{ textAlign: 'center' }}>
-        Click on the Vite and React logos to learn more
-      </p>
-
-      {/* Footer component with inline CSS */}
-      <Footer style={{ textAlign: 'center', padding: '20px', backgroundColor: '#282c34', color: 'white' }} />
+      {/* Include Footer component */}
+      <Footer />
     </>
   );
 }
