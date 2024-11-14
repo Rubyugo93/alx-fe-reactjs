@@ -1,13 +1,12 @@
-// src/components/MainContent.jsx
 import React from 'react';
 
-function MainContent() {
+const MainContent = () => {
   return (
-    <div style={{ backgroundColor: '#f4f4f4', padding: '20px', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-      <h2 style={{ color: '#333', fontSize: '28px' }}>Main Content</h2>
-      <p>This is where the main content will be displayed. You can add more information here.</p>
-    </div>
+    <main style={{ padding: '2em', backgroundColor: '#eaeaea', borderRadius: '8px', textAlign: 'center' }}>
+      <p>Welcome to my favorite cities collection. Here, you'll find amazing places around the world!</p>
+      <p>I love to visit New York, Paris, and Tokyo.</p>
+    </main>
   );
-}
+};
 
 export default MainContent;
