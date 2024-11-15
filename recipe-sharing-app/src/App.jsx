@@ -1,20 +1,17 @@
-import './App.css'; // Import global styles
-import RecipeList from './components/RecipeList'; // Import RecipeList component
-import AddRecipeForm from './components/AddRecipeForm'; // Import AddRecipeForm component
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import RecipeList from './components/RecipeList';  // List all recipes
+import RecipeDetails from './components/RecipeDetails';  // Display recipe details
+import EditRecipeForm from './components/EditRecipeForm';  // Edit existing recipe
 
 function App() {
   return (
-    <div className="App">
-      <header>
-        <h1>Recipe Sharing App</h1>
-      </header>
-      
-      {/* Add Recipe Form */}
-      <AddRecipeForm />
-      
-      {/* Display List of Recipes */}
-      <RecipeList />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<RecipeList />} />
+        <Route path="/recipe/:id" element={<RecipeDetails />} />
+        <Route path="/recipe/edit/:id" element={<EditRecipeForm />} />
+      </Routes>
+    </Router>
   );
 }
 
