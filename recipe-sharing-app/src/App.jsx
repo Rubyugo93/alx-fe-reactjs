@@ -1,12 +1,13 @@
 // src/App.jsx
 import React, { useEffect } from 'react';
-import SearchBar from './components/SearchBar';
-import RecipeList from './components/RecipeList';
 import { useRecipeStore } from './recipeStore';
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
 
 const App = () => {
-  // Access the recipes from Zustand store
   const recipes = useRecipeStore(state => state.recipes);
+  const addFavorite = useRecipeStore(state => state.addFavorite);
+  const removeFavorite = useRecipeStore(state => state.removeFavorite);
 
   // Load initial recipes into the store (can be done via API or mock data)
   useEffect(() => {
@@ -37,10 +38,29 @@ const App = () => {
   return (
     <div className="app">
       <h1>Recipe Sharing Application</h1>
-      {/* Search Bar to filter recipes */}
-      <SearchBar />
-      {/* Recipe List that shows filtered recipes based on search */}
-      <RecipeList />
+      
+      {/* Recipe list */}
+      <h2>All Recipes</h2>
+      {recipes.length === 0 ? (
+        <p>No recipes available!</p>
+      ) : (
+        recipes.map(recipe => (
+          <div key={recipe.id} className="recipe-item">
+            <h3>{recipe.title}</h3>
+            <p>{recipe.description}</p>
+            <p><strong>Prep Time:</strong> {recipe.prepTime} minutes</p>
+            <p><strong>Ingredients:</strong> {recipe.ingredients.join(', ')}</p>
+            <button onClick={() => addFavorite(recipe.id)}>Add to Favorites</button>
+            <button onClick={() => removeFavorite(recipe.id)}>Remove from Favorites</button>
+          </div>
+        ))
+      )}
+
+      {/* Displaying favorite recipes */}
+      <FavoritesList />
+
+      {/* Displaying personalized recommendations */}
+      <RecommendationsList />
     </div>
   );
 };
