@@ -1,10 +1,10 @@
-// src/components/RecipeList.js
+// src/components/RecipeList.jsx
 
 import React from 'react';
 import { useRecipeStore } from './recipeStore';
 
 const RecipeList = () => {
-  const filteredRecipes = useRecipeStore((state) => state.filteredRecipes());
+  const filteredRecipes = useRecipeStore((state) => state.filteredRecipes()); // Get filtered recipes from store
 
   return (
     <div>
@@ -18,7 +18,7 @@ const RecipeList = () => {
             </li>
           ))
         ) : (
-          <p>No recipes found</p>
+          <p>No recipes found</p> {/* Display this message if no recipes match the search */}
         )}
       </ul>
     </div>
