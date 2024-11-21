@@ -8,30 +8,24 @@ const AddRecipeForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (title && description) {
-      addRecipe({ id: Date.now(), title, description });
-      setTitle('');
-      setDescription('');
-    } else {
-      alert('Please fill in both fields.');
-    }
+    addRecipe({ id: Date.now(), title, description });
+    setTitle('');
+    setDescription('');
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Add a Recipe</h2>
+      <h2>Add a New Recipe</h2>
       <input
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="Recipe Title"
-        required
+        placeholder="Title"
       />
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        placeholder="Recipe Description"
-        required
+        placeholder="Description"
       />
       <button type="submit">Add Recipe</button>
     </form>
