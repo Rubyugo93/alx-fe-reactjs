@@ -1,24 +1,37 @@
 // src/components/RecipeList.jsx
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { useRecipeStore } from '../recipeStore';
-import RecipeCard from './RecipeCard';  // Assuming a RecipeCard component exists to display a single recipe
 
 const RecipeList = () => {
-  const filteredRecipes = useRecipeStore(state => state.filteredRecipes);
-
-  // Optionally, you can trigger filtering when the component is mounted or updated
-  useEffect(() => {
-    // Re-filter recipes if needed when the component is first loaded or after state updates
-  }, [filteredRecipes]);
+  const recipes = useRecipeStore((state) => state.recipes);
 
   return (
-    <div className="recipe-list">
-      {filteredRecipes.length > 0 ? (
-        filteredRecipes.map(recipe => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
-        ))
+    <div>
+      <h2 style={{ color: '#444' }}>Recipes</h2>
+      {recipes.length === 0 ? (
+        <p style={{ color: '#888' }}>No recipes available. Add some!</p>
       ) : (
-        <p>No recipes found.</p>
+        <ul style={{ listStyleType: 'none', padding: 0 }}>
+          {recipes.map((recipe) => (
+            <li
+              key={recipe.id}
+              style={{
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                padding: '1rem',
+                marginBottom: '1rem',
+                backgroundColor: '#f9f9f9',
+              }}
+            >
+              <h3>{recipe.title}</h3>
+              <p>{recipe.description}</p>
+              <Link to={`/recipe/${recipe.id}`} style={{ color: 'blue', textDecoration: 'underline' }}>
+                View Details
+              </Link>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
