@@ -1,24 +1,51 @@
-// src/App.jsx
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
 import RecipeList from './components/RecipeList';
-import SearchBar from './components/SearchBar';
-import AddRecipeForm from './components/AddRecipeForm';
+import { useRecipeStore } from './components/recipeStore';
 
 const App = () => {
+  // Accessing the store to check if there are any recommendations
+  const { generateRecommendations } = useRecipeStore(state => state);
+
+  // Generate recommendations on app load (optional)
+  React.useEffect(() => {
+    generateRecommendations();
+  }, [generateRecommendations]);
+
   return (
     <Router>
-      <div style={{ padding: '2rem', fontFamily: 'Arial, sans-serif' }}>
-        <h1>Recipe Sharing Application</h1>
-        
-        {/* The SearchBar is part of the global layout */}
-        <SearchBar />
-        
-        {/* Define routes */}
+      <div>
+        <h1>Recipe Sharing App</h1>
         <Routes>
-          <Route path="/" element={<RecipeList />} /> {/* Main page showing recipes */}
-          <Route path="/add-recipe" element={<AddRecipeForm />} /> {/* Add new recipe */}
+          <Route
+            path="/"
+            element={
+              <div>
+                <h2>All Recipes</h2>
+                <RecipeList />
+              </div>
+            }
+          />
+          <Route
+            path="/favorites"
+            element={
+              <div>
+                <h2>My Favorites</h2>
+                <FavoritesList />
+              </div>
+            }
+          />
+          <Route
+            path="/recommendations"
+            element={
+              <div>
+                <h2>Recommended Recipes</h2>
+                <RecommendationsList />
+              </div>
+            }
+          />
         </Routes>
       </div>
     </Router>
