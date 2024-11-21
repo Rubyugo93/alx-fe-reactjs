@@ -1,30 +1,25 @@
-import { create } from 'zustand';
+// src/components/recipeStore.js
 
-const useRecipeStore = create((set) => ({
-  recipes: [],
-<<<<<<< HEAD
-  addRecipe: (newRecipe) =>
-    set((state) => ({ recipes: [...state.recipes, newRecipe] })),
-  setRecipes: (recipes) => set({ recipes }),
-=======
-  
-  // Add a new recipe
-  addRecipe: (recipe) => set((state) => ({
-    recipes: [...state.recipes, recipe],
+import create from 'zustand';
+
+const useRecipeStore = create((set, get) => ({
+  recipes: [], // List of all recipes
+  searchTerm: '', // Search term state
+  setSearchTerm: (term) => set({ searchTerm: term }), // Action to update searchTerm
+  filteredRecipes: () => {
+    return get().recipes.filter((recipe) =>
+      recipe.title.toLowerCase().includes(get().searchTerm.toLowerCase()) // Filter recipes based on searchTerm
+    );
+  },
+  addRecipe: (recipe) => set((state) => ({ recipes: [...state.recipes, recipe] })),
+  deleteRecipe: (id) => set((state) => ({
+    recipes: state.recipes.filter((recipe) => recipe.id !== id),
   })),
-
-  // Delete a recipe
-  deleteRecipe: (recipeId) => set((state) => ({
-    recipes: state.recipes.filter((recipe) => recipe.id !== recipeId),
-  })),
-
-  // Update an existing recipe
-  updateRecipe: (recipeId, updatedData) => set((state) => ({
+  updateRecipe: (updatedRecipe) => set((state) => ({
     recipes: state.recipes.map((recipe) =>
-      recipe.id === recipeId ? { ...recipe, ...updatedData } : recipe
+      recipe.id === updatedRecipe.id ? updatedRecipe : recipe
     ),
   })),
->>>>>>> 05e2f33c1ac155b89e269210b14c9eeb185871b4
 }));
 
 export { useRecipeStore };
