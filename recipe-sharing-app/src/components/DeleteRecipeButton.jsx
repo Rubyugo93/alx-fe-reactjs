@@ -1,11 +1,11 @@
-import { useRecipeStore } from '../recipeStore';
+import { useRecipeStore } from "../recipeStore";
 
 const DeleteRecipeButton = ({ recipeId }) => {
-  const deleteRecipe = useRecipeStore(state => state.deleteRecipe);
+  const deleteRecipe = useRecipeStore((state) => state.deleteRecipe); // Access the delete action
 
   const handleDelete = () => {
-    deleteRecipe(recipeId);
-    window.location.href = '/';  // Redirect back to the list after deletion
+    deleteRecipe(recipeId); // Delete the recipe
+    alert("Recipe deleted successfully!");
   };
 
   return <button onClick={handleDelete}>Delete Recipe</button>;
