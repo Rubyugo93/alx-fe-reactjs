@@ -1,23 +1,26 @@
-import { useRecipeStore } from './recipeStore';
+// RecommendationList.js
+import React from 'react';
+import useStore from './store'; // Import the Zustand store
 
-const RecommendationsList = () => {
-  const recommendations = useRecipeStore(state => state.recommendations);
+const RecommendationList = () => {
+    const { recommendations, addFavorite } = useStore(state => ({
+        recommendations: state.recommendations,
+        addFavorite: state.addFavorite
+    }));
 
-  return (
-    <div>
-      <h2>Recommended Recipes</h2>
-      {recommendations.length > 0 ? (
-        recommendations.map(recipe => (
-          <div key={recipe.id}>
-            <h3>{recipe.title}</h3>
-            <p>{recipe.description}</p>
-          </div>
-        ))
-      ) : (
-        <p>No recommendations available yet!</p>
-      )}
-    </div>
-  );
+    return (
+        <div>
+            <h2>Recommendations</h2>
+            <ul>
+                {recommendations.map(item => (
+                    <li key={item.id}>
+                        {item.name}
+                        <button onClick={() => addFavorite(item)}>Add to Favorites</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 };
 
-export default RecommendationsList;
+export default RecommendationList;

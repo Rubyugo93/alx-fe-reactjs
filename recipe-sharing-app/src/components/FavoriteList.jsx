@@ -1,26 +1,26 @@
-import { useRecipeStore } from './recipeStore';
+// FavouritesList.js
+import React from 'react';
+import useStore from './store'; // Import the Zustand store
 
-const FavoritesList = () => {
-  const recipes = useRecipeStore(state => state.recipes);
-  const favorites = useRecipeStore(state => state.favorites.map(id =>
-    recipes.find(recipe => recipe.id === id)
-  ));
+const FavouritesList = () => {
+    const { favorites, removeFavorite } = useStore(state => ({
+        favorites: state.favorites,
+        removeFavorite: state.removeFavorite
+    }));
 
-  return (
-    <div>
-      <h2>My Favorites</h2>
-      {favorites.length > 0 ? (
-        favorites.map(recipe => (
-          <div key={recipe.id}>
-            <h3>{recipe.title}</h3>
-            <p>{recipe.description}</p>
-          </div>
-        ))
-      ) : (
-        <p>No favorites yet!</p>
-      )}
-    </div>
-  );
+    return (
+        <div>
+            <h2>Your Favorites</h2>
+            <ul>
+                {favorites.map(item => (
+                    <li key={item.id}>
+                        {item.name} 
+                        <button onClick={() => removeFavorite(item.id)}>Remove</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 };
 
-export default FavoritesList;
+export default FavouritesList;
