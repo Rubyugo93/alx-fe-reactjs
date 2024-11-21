@@ -1,15 +1,24 @@
-import React from 'react';
-import RecipeList from './components/RecipeList';
-import AddRecipeForm from './components/AddRecipeForm';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import RecipeList from "./components/RecipeList";
+import RecipeDetails from "./components/RecipeDetails";
 
 const App = () => {
   return (
-    <div style={{ padding: '2rem', fontFamily: 'Arial, sans-serif' }}>
-      <h1>Recipe Sharing Application</h1>
-      <AddRecipeForm />
-      <RecipeList />
-    </div>
+    <Router>
+      <nav>
+        <Link to="/">Home</Link> {/* Link to home */}
+      </nav>
+      <Routes>
+        <Route path="/" element={<RecipeList />} /> {/* Show list of recipes */}
+        <Route path="/recipes/:id" element={<RecipeDetailsWrapper />} /> {/* Show recipe details */}
+      </Routes>
+    </Router>
   );
+};
+
+const RecipeDetailsWrapper = () => {
+  const { id } = useParams(); // Get the recipe ID from the URL
+  return <RecipeDetails recipeId={parseInt(id)} />;
 };
 
 export default App;
