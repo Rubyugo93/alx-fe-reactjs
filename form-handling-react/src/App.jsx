@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div className="App">
       <h1>User Registration</h1>
-      
+
       <h2>Controlled Form:</h2>
       <RegistrationForm />
 
