@@ -1,50 +1,49 @@
-// src/components/RegistrationForm.js
 import React, { useState } from 'react';
 
-const RegistrationForm = () => {
-  const [formData, setFormData] = useState({ email: '', password: '' });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+function RegistrationForm() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    if (!username || !email || !password) {
+      alert('All fields are required!');
+      return;
+    }
+    // Simulate API call
+    console.log({ username, email, password });
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="email">Email:</label>
+        <label>Username:</label>
         <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Enter your email"
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
       </div>
       <div>
-        <label htmlFor="password">Password:</label>
+        <label>Email:</label>
         <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Enter your password"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <button type="submit">Submit</button>
+      <div>
+        <label>Password:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <button type="submit">Register</button>
     </form>
   );
-};
+}
 
 export default RegistrationForm;
-
-           
-         
