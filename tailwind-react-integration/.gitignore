@@ -1,9 +1,4 @@
-# Lo# Ignore node_modules
-node_modules/
-.vite/
-
-
-gs
+# Logs
 logs
 *.log
 npm-debug.log*
