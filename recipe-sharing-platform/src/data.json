@@ -3,25 +3,42 @@
       "id": 1,
       "title": "Spaghetti Carbonara",
       "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-      "image": "https://via.placeholder.com/150"
+      "image": "https://via.placeholder.com/150",
+      "ingredients": [
+        "200g spaghetti",
+        "100g pancetta",
+        "2 eggs",
+        "50g parmesan cheese",
+        "Black pepper"
+      ],
+      "instructions": [
+        "Boil the pasta in salted water.",
+        "Fry the pancetta until crispy.",
+        "Mix eggs and cheese together.",
+        "Combine pasta with pancetta, then mix with egg and cheese mixture.",
+        "Serve with a generous amount of black pepper."
+      ]
     },
     {
       "id": 2,
       "title": "Chicken Tikka Masala",
-      "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.",
-      "image": "https://via.placeholder.com/150"
-    },
-    {
-      "id": 3,
-      "title": "Vegetable Stir-Fry",
-      "summary": "A healthy mix of vegetables stir-fried in a savory soy sauce-based dressing.",
-      "image": "https://via.placeholder.com/150"
-    },
-    {
-      "id": 4,
-      "title": "Beef Stew",
-      "summary": "Tender chunks of beef cooked in a rich and hearty stew with vegetables and spices.",
-      "image": "https://via.placeholder.com/150"
+      "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
+      "image": "https://via.placeholder.com/150",
+      "ingredients": [
+        "500g chicken",
+        "2 tbsp tikka masala paste",
+        "200ml cream",
+        "1 onion",
+        "1 can tomatoes",
+        "Coriander"
+      ],
+      "instructions": [
+        "Marinate chicken with tikka masala paste.",
+        "Grill the chicken pieces.",
+        "Cook onions until golden, then add tomatoes and cream.",
+        "Simmer the sauce until thick.",
+        "Add the grilled chicken and serve with coriander."
+      ]
     }
   ]
   
