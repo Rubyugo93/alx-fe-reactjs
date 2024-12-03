@@ -2,143 +2,107 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './index.css';  // Import Tailwind CSS styles
 
-// Sample Mock Recipe Data (now includes ingredients and instructions)
 const mockRecipeData = [
-  {
-    id: 1,
-    title: "Spaghetti Carbonara",
-    summary: "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    image: "https://via.placeholder.com/150",
-    ingredients: [
-      "200g Spaghetti",
-      "100g Pancetta",
-      "2 large eggs",
-      "50g Parmesan cheese",
-      "50g Pecorino Romano cheese",
-      "Black pepper, freshly ground",
-      "Salt"
-    ],
-    instructions: [
-      "Cook the spaghetti in salted boiling water until al dente.",
-      "Fry the pancetta in a pan until crispy.",
-      "Whisk the eggs with grated cheese and pepper.",
-      "Combine the spaghetti, pancetta, and egg mixture. Toss until creamy.",
-      "Serve with extra grated cheese and black pepper."
-    ]
-  },
-  {
-    id: 2,
-    title: "Chicken Tikka Masala",
-    summary: "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.",
-    image: "https://via.placeholder.com/150",
-    ingredients: [
-      "500g Chicken breast, cubed",
-      "1 onion, finely chopped",
-      "2 garlic cloves, minced",
-      "1 tbsp ginger, minced",
-      "2 tbsp curry powder",
-      "200ml tomato puree",
-      "200ml cream",
-      "1 tbsp cilantro, chopped",
-      "Salt and pepper"
-    ],
-    instructions: [
-      "Marinate the chicken with spices and yogurt for 30 minutes.",
-      "Grill the chicken pieces until cooked.",
-      "Prepare the sauce with onion, garlic, ginger, curry powder, and tomato puree.",
-      "Add cream and simmer until the sauce thickens.",
-      "Add the chicken, cook for 10 more minutes.",
-      "Serve with cilantro and rice."
-    ]
-  },
-  {
-    id: 3,
-    title: "Vegetarian Tacos",
-    summary: "A delicious and healthy taco with a variety of fresh vegetables, avocado, and a tangy sauce.",
-    image: "https://via.placeholder.com/150",
-    ingredients: [
-      "4 tortillas",
-      "1 avocado, sliced",
-      "1 cup corn kernels",
-      "1 bell pepper, diced",
-      "1 tomato, diced",
-      "1/2 cup red onion, sliced",
-      "Lettuce leaves",
-      "Lime",
-      "Salt, to taste",
-      "Taco sauce"
-    ],
-    instructions: [
-      "Warm the tortillas in a pan.",
-      "Prepare the vegetables and avocado.",
-      "Layer the tortillas with lettuce, vegetables, and avocado.",
-      "Top with taco sauce and a squeeze of lime.",
-      "Serve immediately."
-    ]
-  },
-  {
-    id: 4,
-    title: "Beef Stew",
-    summary: "A hearty and flavorful stew made with tender beef, vegetables, and rich broth.",
-    image: "https://via.placeholder.com/150",
-    ingredients: [
-      "500g beef stew meat, cubed",
-      "3 carrots, sliced",
-      "3 potatoes, diced",
-      "1 onion, chopped",
-      "4 cups beef broth",
-      "2 garlic cloves, minced",
-      "1 tbsp thyme",
-      "Salt and pepper"
-    ],
-    instructions: [
-      "Brown the beef cubes in a pot.",
-      "Add the onion, garlic, and cook until softened.",
-      "Add the carrots, potatoes, and beef broth.",
-      "Simmer for 2 hours until tender.",
-      "Season with thyme, salt, and pepper.",
-      "Serve hot with crusty bread."
-    ]
-  }
+  // Your existing mock recipe data here
 ];
 
-// Define the RecipeDetail component for displaying a detailed view
 const RecipeDetail = ({ match }) => {
   const recipe = mockRecipeData.find((r) => r.id === parseInt(match.params.id));
   if (!recipe) return <div>Recipe not found</div>;
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h2 className="text-3xl font-bold text-blue-500 mb-4">{recipe.title}</h2>
-      <img src={recipe.image} alt={recipe.title} className="w-full h-64 object-cover rounded-lg mb-4" />
-      <p className="text-gray-600 mb-6">{recipe.summary}</p>
-
-      <h3 className="text-2xl font-semibold text-gray-700 mb-4">Ingredients</h3>
-      <ul className="list-disc pl-5 space-y-2">
-        {recipe.ingredients.map((ingredient, index) => (
-          <li key={index} className="text-gray-700">{ingredient}</li>
-        ))}
-      </ul>
-
-      <h3 className="text-2xl font-semibold text-gray-700 mt-6 mb-4">Cooking Instructions</h3>
-      <ol className="list-decimal pl-5 space-y-2">
-        {recipe.instructions.map((instruction, index) => (
-          <li key={index} className="text-gray-700">{instruction}</li>
-        ))}
-      </ol>
+      {/* Recipe detail content */}
     </div>
   );
 };
 
-// Define the App component
-const App = () => {
-  const [recipes, setRecipes] = useState([]);
+const AddRecipeForm = ({ onAddRecipe }) => {
+  const [title, setTitle] = useState('');
+  const [ingredients, setIngredients] = useState('');
+  const [instructions, setInstructions] = useState('');
+  const [errors, setErrors] = useState({});
 
-  // Fetch the recipe data (can be from an external file or API in real apps)
-  useEffect(() => {
-    // Simulate fetching data by using mockRecipeData directly
-    setRecipes(mockRecipeData);
-  }, []);
+  const validateForm = () => {
+    const newErrors = {};
+    if (!title) newErrors.title = "Title is required";
+    if (!ingredients) newErrors.ingredients = "Ingredients are required";
+    if (!instructions) newErrors.instructions = "Instructions are required";
+    if (ingredients.split(',').length < 2) newErrors.ingredients = "At least two ingredients are required";
+    return newErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length === 0) {
+      const newRecipe = {
+        id: Date.now(),
+        title,
+        summary: title,
+        ingredients: ingredients.split(','),
+        instructions: instructions.split('.'),
+        image: "https://via.placeholder.com/150"
+      };
+      onAddRecipe(newRecipe);
+      setTitle('');
+      setIngredients('');
+      setInstructions('');
+    } else {
+      setErrors(validationErrors);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto mt-8">
+      <h2 className="text-2xl font-semibold text-gray-700 mb-4">Add a New Recipe</h2>
+      <div className="mb-4">
+        <label htmlFor="title" className="block text-gray-700">Title</label>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded-md"
+        />
+        {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="ingredients" className="block text-gray-700">Ingredients (comma separated)</label>
+        <textarea
+          id="ingredients"
+          value={ingredients}
+          onChange={(e) => setIngredients(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded-md"
+        />
+        {errors.ingredients && <p className="text-red-500 text-sm">{errors.ingredients}</p>}
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="instructions" className="block text-gray-700">Instructions</label>
+        <textarea
+          id="instructions"
+          value={instructions}
+          onChange={(e) => setInstructions(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded-md"
+        />
+        {errors.instructions && <p className="text-red-500 text-sm">{errors.instructions}</p>}
+      </div>
+
+      <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
+        Add Recipe
+      </button>
+    </form>
+  );
+};
+
+const App = () => {
+  const [recipes, setRecipes] = useState(mockRecipeData);
+
+  const handleAddRecipe = (newRecipe) => {
+    setRecipes([...recipes, newRecipe]);
+  };
 
   return (
     <Router>
@@ -148,35 +112,41 @@ const App = () => {
         </header>
 
         <main className="mt-8 w-full max-w-screen-lg px-4">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-4">Featured Recipes</h2>
+          <Routes>
+            <Route path="/" element={
+              <>
+                <h2 className="text-2xl font-semibold text-gray-700 mb-4">Featured Recipes</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  {recipes.map((recipe) => (
+                    <div key={recipe.id} className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300">
+                      <img src={recipe.image} alt={recipe.title} className="w-full h-48 object-cover rounded-lg mb-4" />
+                      <h3 className="text-xl font-bold text-blue-500">{recipe.title}</h3>
+                      <p className="text-gray-600 mt-2">{recipe.summary}</p>
+                      <Link to={`/recipe/${recipe.id}`}>
+                        <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                          View Recipe
+                        </button>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
 
-          {/* Recipe Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {recipes.map((recipe) => (
-              <div key={recipe.id} className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300">
-                <img src={recipe.image} alt={recipe.title} className="w-full h-48 object-cover rounded-lg mb-4" />
-                <h3 className="text-xl font-bold text-blue-500">{recipe.title}</h3>
-                <p className="text-gray-600 mt-2">{recipe.summary}</p>
-                <Link to={`/recipe/${recipe.id}`}>
-                  <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                    View Recipe
+                <Link to="/add-recipe">
+                  <button className="mt-8 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+                    Add New Recipe
                   </button>
                 </Link>
-              </div>
-            ))}
-          </div>
+              </>
+            } />
+            <Route path="/recipe/:id" element={<RecipeDetail />} />
+            <Route path="/add-recipe" element={<AddRecipeForm onAddRecipe={handleAddRecipe} />} />
+          </Routes>
         </main>
 
         <footer className="w-full bg-gray-800 p-4 text-center text-white mt-8">
           <p>&copy; 2024 Recipe Sharing Platform | All Rights Reserved</p>
         </footer>
       </div>
-
-      {/* Define routes */}
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/recipe/:id" element={<RecipeDetail />} />
-      </Routes>
     </Router>
   );
 };
