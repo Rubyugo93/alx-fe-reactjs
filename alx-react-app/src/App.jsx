@@ -22,7 +22,7 @@ function App() {
       <MainContent />
       
       {/* Include UserProfile component with example props */}
-      <UserProfile name="John Doe" age={30} bio="A traveler and photographer" />
+      <UserProfile name=["Alice", "25", "Loves hiking and photography"] />
 
       {/* Display Vite and React logos */}
       <div>
