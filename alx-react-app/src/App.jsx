@@ -23,6 +23,7 @@ function App() {
       
       {/* Include UserProfile component with example props */}
       <UserProfile name=["Alice", "25", "Loves hiking and photography"] />
+      ["age=", "bio="] />
 
       {/* Display Vite and React logos */}
       <div>
