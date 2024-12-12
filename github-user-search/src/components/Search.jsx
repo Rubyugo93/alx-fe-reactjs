@@ -1,11 +1,11 @@
 // src/components/Search.jsx
 import React, { useState } from "react";
-import { fetchGitHubUser } from "../services/githubService"; // Import the API function
+import { fetchUserData } from "../services/githubService"; // Correct import for fetchUserData
 
 function Search() {
   const [username, setUsername] = useState(""); // State to hold input value
   const [location, setLocation] = useState(""); // State to hold location input
-  const [repoCount, setRepoCount] = useState(""); // State to hold minimum repository count
+  const [minRepos, setMinRepos] = useState(""); // State to hold minimum repository count
   const [user, setUser] = useState(null); // State to hold fetched user data
   const [repositories, setRepositories] = useState([]); // State to hold user's repositories
   const [error, setError] = useState(""); // State to hold error messages
@@ -20,7 +20,7 @@ function Search() {
     setError(""); // Clear previous errors
 
     try {
-      const data = await fetchGitHubUser(username, location, repoCount); // Fetch user data with advanced search parameters
+      const data = await fetchUserData(username, location, minRepos); // Use the correct API function
       setUser(data); // Set the user data
 
       // Fetch user's repositories (assuming `repos_url` is returned)
@@ -64,8 +64,8 @@ function Search() {
         <div>
           <input
             type="number"
-            value={repoCount}
-            onChange={(e) => setRepoCount(e.target.value)}
+            value={minRepos}
+            onChange={(e) => setMinRepos(e.target.value)}
             placeholder="Minimum repos (optional)"
             className="p-2 border border-gray-300 rounded"
           />
