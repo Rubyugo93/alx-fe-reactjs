@@ -8,7 +8,7 @@ const API_URL = "https://api.github.com";
 const API_KEY = import.meta.env.VITE_GITHUB_API_KEY;
 
 // Function to fetch GitHub user data by username with advanced search
-export const fetchUserData = async (username, location = "", repoCount = "") => {
+export const fetchGitHubUser = async (username, location = "", repoCount = "") => {
   try {
     // Construct search query for advanced search
     let query = `q=${username}`;
@@ -26,6 +26,29 @@ export const fetchUserData = async (username, location = "", repoCount = "") => 
     return response.data.items[0]; // Assuming we want the first match from search results
   } catch (error) {
     // Handle errors if API request fails
+    console.error("Error fetching user data:", error);
+    throw new Error("Unable to fetch user data. Please try again.");
+  }
+};
+
+// **Add the fetchUserData function here**
+export const fetchUserData = async (username, location = "", repoCount = "") => {
+  try {
+    // Construct the query parameters for advanced search
+    let query = `q=${username}`;
+    if (location) query += `+location:${location}`;
+    if (repoCount) query += `+repos:>=${repoCount}`;
+
+    // Make the API call to fetch user data
+    const response = await axios.get(`${API_URL}/search/users?${query}`, {
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+      },
+    });
+
+    // Return the first user from the search results
+    return response.data.items[0];
+  } catch (error) {
     console.error("Error fetching user data:", error);
     throw new Error("Unable to fetch user data. Please try again.");
   }
